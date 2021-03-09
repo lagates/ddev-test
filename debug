@@ -1,0 +1,189 @@
++ uname -a
+Darwin Lauras-MBP 20.3.0 Darwin Kernel Version 20.3.0: Thu Jan 21 00:07:06 PST 2021; root:xnu-7195.81.3~1/RELEASE_X86_64 x86_64
++ ddev --version
+ddev version v1.16.7
++ ddev version
+DDEV-Local version	v1.16.7
+db                	drud/ddev-dbserver-mariadb-10.2:v1.16.0
+dba               	phpmyadmin:5
+ddev-ssh-agent    	drud/ddev-ssh-agent:v1.16.0
+docker            	20.10.5
+docker-compose    	1.28.5
+os                	darwin
+router            	drud/ddev-router:v1.16.2
+web               	drud/ddev-webserver:v1.16.7
+++ which docker
++ ls -l /usr/local/bin/docker
+lrwxr-xr-x  1 root  admin  54 Mar  9 12:08 /usr/local/bin/docker -> /Applications/Docker.app/Contents/Resources/bin/docker
++ docker version
+Client: Docker Engine - Community
+ Cloud integration: 1.0.9
+ Version:           20.10.5
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        55c4c88
+ Built:             Tue Mar  2 20:13:00 2021
+ OS/Arch:           darwin/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.5
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       363e9a8
+  Built:            Tue Mar  2 20:15:47 2021
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.4.3
+  GitCommit:        269548fa27e0089a8b8278fc4fc781d7f65a939b
+ runc:
+  Version:          1.0.0-rc92
+  GitCommit:        ff819c7e9184c13b7c2607fe6c30ae19403a7aff
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
++ ddev poweroff
+Removed any existing custom TLS certificates
+Removing container: ddev-[site name]-web
+Removing container: ddev-[site name]-dba
+Removing container: ddev-[site name]-memcached
+Removing container: ddev-[site name]-solr
+Removing container: ddev-[site name]_pa11y_1
+Removing container: ddev-[site name]-db
+Project [site name] has been stopped.
+The ddev-ssh-agent container has been removed. When you start it again you will have to use 'ddev auth ssh' to provide key authentication again.
++ docker ps -a
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS                      PORTS     NAMES
+4f99a3234ddc   prometsource/apache-tika-server   "/bin/sh -c 'java -j…"   58 seconds ago   Exited (1) 56 seconds ago             ddev-gao_tika_1
++ docker run -it --rm busybox ls
+bin   dev   etc   home  proc  root  sys   tmp   usr   var
++ mkdir -p /Users/lauragates/tmp/tryddevproject
++ cd /Users/lauragates/tmp/tryddevproject
++ printf '<?php\nprint '\''ddev is working. You will want to delete this project with "ddev delete -Oy tryddevproject"'\'';\n'
++ ddev config --project-type=php
+You are reconfiguring the project at /Users/lauragates/tmp/tryddevproject.
+The existing configuration will be updated and replaced.
+Found a php codebase at /Users/lauragates/tmp/tryddevproject
+Project type has no settings paths configured, so not creating settings file.
+Configuration complete. You may now run 'ddev start'.
++ ddev start
+Starting tryddevproject...
+Building ddev-ssh-agent
+#1 [internal] load build definition from Dockerfile
+#1 sha256:3a38d2563a32d39f356f04678a3cfd6adec3bce2eca0ca0d9e0a02031e4bdb12
+#1 transferring dockerfile: 343B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:5ff747831171f99144c481080fca1e09824a51f6415d194221113fda399e9436
+#2 transferring context: 2B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/drud/ddev-ssh-agent:v1.16.0
+#3 sha256:ddca59fb7f7ae5c8fd299aea0b8bfeaff826f179e1c995cc084faaebdd829a7c
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/drud/ddev-ssh-agent:v1.16.0
+#4 sha256:52f8f66c763b4596f8aebdb54e9b51e6ffd5b62427f8ab3a484a29b98481e15c
+#4 DONE 0.0s
+
+#5 [2/2] RUN (groupadd --gid 20 "lauragates" || groupadd "lauragates" || true) && (useradd  -l -m -s "/bin/bash" --gid "lauragates" --comment '' --uid 501 "lauragates" || useradd  -l -m -s "/bin/bash" --gid "lauragates" --comment '' "lauragates")
+#5 sha256:a3fd77234044c84ad65ef2b7deb7c01b7482bc4b21a5a24ed022559781c45654
+#5 CACHED
+
+#6 exporting to image
+#6 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#6 exporting layers done
+#6 writing image sha256:30c58303b789e15aa3b7094b4d2905605bf3c034f59f4d1bd623f5b30ab4883b done
+#6 naming to docker.io/drud/ddev-ssh-agent:v1.16.0-built done
+#6 DONE 0.0s
+Creating ddev-ssh-agent ...
+Creating ddev-ssh-agent ... done
+ssh-agent container is running: If you want to add authentication to the ssh-agent container, run 'ddev auth ssh' to enable your keys.
+Pushed mkcert rootca certs to ddev-global-cache/mkcert
+The hostname tryddevproject.ddev.site is not currently resolvable, trying to add it to the hosts file
+ddev needs to add an entry to your hostfile.
+It will require administrative privileges via the sudo command, so you may be required
+to enter your password for sudo. ddev is about to issue the command:
+    sudo /usr/local/bin/ddev hostname tryddevproject.ddev.site 127.0.0.1
+Please enter your password if prompted.
+Running   Command=sudo /usr/local/bin/ddev hostname tryddevproject.ddev.site 127.0.0.1
+Password:
+Creating volume "tryddevproject-mariadb" with default driver
+Building db
+#1 [internal] load build definition from Dockerfile
+#1 sha256:dbc249c67977abd4dc3b77f71278c63f7f75cb866c0019d1f7b148ac3a4faff3
+#1 transferring dockerfile: 343B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:67ad06906f4dbbb26bd2a8db33aadca3da5215130c208a3f23589e74246c2303
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/drud/ddev-dbserver-mariadb-10.2:v1.16.0
+#3 sha256:1f0d196397506037029cc19d4ed819ae4f37f046db16c83ac566560cbe5d4934
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/drud/ddev-dbserver-mariadb-10.2:v1.16.0
+#4 sha256:d5215e167098d057d01c4562aeb8f3b68eb90a1ff8bd74b47730f6b96e4a14af
+#4 DONE 0.0s
+
+#5 [2/2] RUN (groupadd --gid 20 "lauragates" || groupadd "lauragates" || true) && (useradd  -l -m -s "/bin/bash" --gid "lauragates" --comment '' --uid 501 "lauragates" || useradd  -l -m -s "/bin/bash" --gid "lauragates" --comment '' "lauragates")
+#5 sha256:9e2a5250f002269fdfa45a9cc2084cfb949bb223e1c2de41e2b25a3cf0dca07e
+#5 CACHED
+
+#6 exporting to image
+#6 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#6 exporting layers done
+#6 writing image sha256:ff6b9ddf21ac1491ffe6428bd2017c89ef456d1122bcfc993ff62e801c906b32 done
+#6 naming to docker.io/drud/ddev-dbserver-mariadb-10.2:v1.16.0-tryddevproject-built done
+#6 DONE 0.0s
+Building web
+#1 [internal] load build definition from Dockerfile
+#1 sha256:6dfd6dbb8d842a9ab5ba7e0cd010e91b478bae223e353fa67ed7905adfd008a6
+#1 transferring dockerfile: 343B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:151028851e703c6f102f74664982c492e3f73a5eb65a30f317df68a9defe7e09
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/drud/ddev-webserver:v1.16.7
+#3 sha256:f96df29d7ef644c662c0374da1d105bfc7fd35d0bda48a2554c8a481c3e4f45a
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/drud/ddev-webserver:v1.16.7
+#4 sha256:9ff64e3eb0139a3d569c9a7b79732ca3520681fcb7c440808178388917a24c2c
+#4 DONE 0.0s
+
+#5 [2/2] RUN (groupadd --gid 20 "lauragates" || groupadd "lauragates" || true) && (useradd  -l -m -s "/bin/bash" --gid "lauragates" --comment '' --uid 501 "lauragates" || useradd  -l -m -s "/bin/bash" --gid "lauragates" --comment '' "lauragates")
+#5 sha256:f10ea627ba5cb0fe73dd1ecd20b0a67b1a86950d2baa61d6965fa59a3ef5ce63
+#5 CACHED
+
+#6 exporting to image
+#6 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#6 exporting layers done
+#6 writing image sha256:180ba81c4a358ac0d41b00e505ec9107005e91ed455ef677ccb85fd7cd032a89 done
+#6 naming to docker.io/drud/ddev-webserver:v1.16.7-tryddevproject-built done
+#6 DONE 0.0s
+Creating ddev-tryddevproject-db ...
+Creating ddev-tryddevproject-db ... done
+Creating ddev-tryddevproject-web ...
+Creating ddev-tryddevproject-dba ...
+Creating ddev-tryddevproject-dba ... done
+Creating ddev-tryddevproject-web ... done
+Creating ddev-router ...
+Creating ddev-router ... done
+Project type has no settings paths configured, so not creating settings file.
+Successfully started tryddevproject
+Project can be reached at https://tryddevproject.ddev.site https://127.0.0.1:50690
++ ddev launch
++ cleanup
++ printf '\nPlease delete this project after debugging with '\''ddev delete -Oy tryddevproject'\''\n'
+
+Please delete this project after debugging with 'ddev delete -Oy tryddevproject'
